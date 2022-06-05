@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+
+{% load static %}
+{% block title %}Search{% endblock title %}
+{% block main-content %}
+    {% if searched %}
+        <h1>You Searched For: {{searched}}</h1>
+        <br>
+        {% for pro in prod %}
+            <div class="container my-5">
+                <div class="col-sm-6 text-center align-self-center">
+                    <form action="{% url 'product-detail' pro %}" method="">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-secondary" >
+                            <p>Product Title: {{pro.title}}</p>
+                            <p>Product Brand: {{pro.brand}}</p>
+                        </button>
+                    </form>
+                    <hr>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h1>No Search Record</h1>
+    {% endif %}
+{% endblock main-content %}
